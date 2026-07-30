@@ -1,0 +1,17 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "description": "Test swagger code",
+        "version": "0.0.1",
+        "title": "Codiswa",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/license/MIT"
+        },
+        "contact": {
+            "name": "Arczibold"
+        }
+    },
+    "servers": [{ "url": "127.0.0.1:5000", "desciption": "local" }],
+    "tags": [{ "name": "todo" }]
+}
