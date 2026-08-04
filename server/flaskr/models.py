@@ -12,3 +12,12 @@ class Item(db.Model):
 
     def to_dict(self):
         return {"id": self.id, "name": self.name, "description": self.description}
+
+
+class People(db.Model):
+    __tablename__ = "people"
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(120), nullable=False)
+    lastname = db.Column(db.String(120), nullable=False)
+
+    
