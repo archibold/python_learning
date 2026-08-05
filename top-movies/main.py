@@ -45,6 +45,11 @@ class Books(db.Model):
     review: Mapped[str]
     img_url: Mapped[str]
 
+class RateBookForm(FlaskForm):
+    ranging = StringField("Your rating")
+    review = StringField("Your review")
+    submit = SubmitField("Done")
+
 with app.app_context():
     db.create_all()
 
@@ -54,6 +59,28 @@ def home():
     result = db.session.execute(db.select(Books))
     all_books = result.scalars().all()
     return render_template("index.html", movies=all_books)
+
+@app.route("/edit",methods=["GET", "POST"])
+def edit():
+    form = RateBookForm()
+    id = request.args.get("id")
+    book = db.get_or_404(Books, id)
+    form.ranging.default = book.ranging
+    form.review.default = book.review
+    print(book.review)
+    print(book.ranging)
+    if form.validate_on_submit():
+        print('---------')
+        print(float(form.ranging.data))
+        print(form.review.data)
+        print('---------')
+        book.ranging = float(form.ranging.data)
+        book.review = form.review.data
+        print(book.review)
+        print(book.ranging)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("edit.html", movie=book, form=form)
 
 
 if __name__ == '__main__':
