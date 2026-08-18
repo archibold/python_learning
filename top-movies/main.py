@@ -63,7 +63,7 @@ def home():
 @app.route("/edit",methods=["GET", "POST"])
 def edit():
     form = RateBookForm()
-    id = request..argsget("id")
+    id = request.argsget("id")
     book = db.get_or_404(Books, id)
     form.ranging.default = book.ranging
     form.review.default = book.review
