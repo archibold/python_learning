@@ -76,11 +76,7 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        # try:
         result = db.session.execute(db.select(User).where(User.email == email))
-        # except UnboundLocalError:
-        #     flash('email doesnt exist')
-        #     return render_template("login.html")
         user = result.scalar_one()
 
         if check_password_hash(user.password, password):
